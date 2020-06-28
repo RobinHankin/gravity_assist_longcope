@@ -6,6 +6,7 @@
 
 source("usefulfuncs.R")
 source("longcope.R")
+source("longcope_inverse.R")
 
 `do` <- function(command, basename){
     ##  do() is just a convenience wrapper to create a pdf
