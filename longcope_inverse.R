@@ -10,20 +10,18 @@
     
     periap <- expand.grid(perihelion,aphelion)
     vv <- t(apply(periap,1,f_inv))
-    
+    colnames(vv) <- c("v_r","v_phi")
+    vv <- cbind(vv,speed=apply(vv,1,function(x){sqrt((x[1]-1)^2+(x[2])^2)}))
+
     plot(NA,xlim=range(perihelion),ylim=range(aphelion),type="n",xlab='perihelion',ylab='aphelion',axes=FALSE)
     axis(1,pos=1)
     axis(2,pos=0)
     contour(perihelion,aphelion,matrix(vv[,1],n,n),col='black',add=TRUE)
     contour(perihelion,aphelion,matrix(vv[,2],n,n),col='red',add=TRUE,levels=(1:6)/5)
-
     ## scattering arc:
-    theta <- seq(from=0,to=pi,len=n)
-    vrel <- c(0.1,0.2,0.3)
-    for(u in vrel){
-        jj <- t(apply(cbind(1+u*cos(theta),u*sin(theta)),1,f_vec))
-        points(jj,type="l",col="blue")
-    }
+    contour(perihelion,aphelion,matrix(vv[,3],n,n),col='blue',add=TRUE,levels=c(0.1*(1:7)))
+
+
 
     op <- par(bg="white")
     legend("topright",lty=1,
