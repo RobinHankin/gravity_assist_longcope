@@ -16,7 +16,7 @@
     v <- expand.grid(vx,vy)
     
     perihelion <- apply(v,1,f_peri) 
-    aphelion <- apply(v,1,f_ap  )
+    aphelion <- apply(v,1,f_ap)
     ## plot commands start
     plot(0:1, type = "n", asp=1, axes=FALSE,
          xlim=c(0,sqrt(2)),ylim=c(0,sqrt(2)),
